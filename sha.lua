@@ -1,3 +1,6 @@
+local msg = ...
+assert(type(msg) == "string", "The message has to be a string")
+
 local hashValues = {
     "6a09e667",
     "bb67ae85",
@@ -75,3 +78,8 @@ local roundConstants = {
     "bef9a3f7",
     "c67178f2"
 }
+
+local newMsg = ""
+do
+    for k, v in msg:gmatch(".") do
+        
