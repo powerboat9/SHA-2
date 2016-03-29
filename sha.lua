@@ -1,6 +1,15 @@
 local msg = ...
 assert(type(msg) == "string", "The message has to be a string")
 
+function toBinary(s) --Assumes big edien
+    local numb = 0
+    for i, char in s:gmatch(".") do
+        numb = numb + (char:byte() * (256 ^ (i - 1)))
+    end
+    for i = #s, 1, -1 do
+        if numb >= (256 ^ 
+end
+
 local hashValues = {
     "6a09e667",
     "bb67ae85",
@@ -82,4 +91,4 @@ local roundConstants = {
 local newMsg = ""
 do
     for k, v in msg:gmatch(".") do
-        
+        local b = 
