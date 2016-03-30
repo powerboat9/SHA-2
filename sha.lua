@@ -1,14 +1,23 @@
 local msg = ...
 assert(type(msg) == "string", "The message has to be a string")
 
-function toBinary(s) --Assumes big edien
+function hexToNumb(s) --Assumes big edien
+    s = s:lower()
     local numb = 0
-    for i, char in s:gmatch(".") do
-        numb = numb + (char:byte() * (256 ^ (i - 1)))
+    for i = 1, #s do
+        local value = assert(("0123456789abcdef"):find(s:sub(i, i)), "Invalid Charicter At Index " .. i) - 1
+        numb = numb + value * (16 ^ (#s - i))
     end
-    for i = #s, 1, -1 do
-        if numb >= (256 ^ 
+    return numb
 end
+
+function numbToBits(n)
+    assert((type(n) == "number") and (n >= 0) and (n < (16 ^ 8)), "The number is too big, negative, or not a number")
+    local hex = ""
+    for i = 8, 1, -1 do
+        local times = math.floor(n / (16 ^ (i - 1)))
+        if times > 0 then
+            
 
 local hashValues = {
     "6a09e667",
