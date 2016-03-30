@@ -11,13 +11,32 @@ function hexToNumb(s) --Assumes big edien
     return numb
 end
 
-function numbToBits(n)
+function numbToHex(n)
     assert((type(n) == "number") and (n >= 0) and (n < (16 ^ 8)), "The number is too big, negative, or not a number")
     local hex = ""
     for i = 8, 1, -1 do
         local times = math.floor(n / (16 ^ (i - 1)))
-        if times > 0 then
-            
+        hex = hex .. ("0123456789abcdef"):sub(times + 1, times + 1)
+        n = n - times * (16 ^ (i - 1))
+    end
+    return hex
+end
+
+function numbToBits(n)
+    --Line below copied from "numbToHex"
+    assert((type(n) == "number") and (n >= 0) and (n < (16 ^ 8)), "The number is too big, negative, or not a number")
+    local bits = {}
+    for i = 32, 1, -1 do
+        local value = (2 ^ (i - 1))
+        if n >= value then
+            n = n - value
+            bits[i] = true
+        else
+            bits[i] = false
+        end
+    end
+    return bits
+end
 
 local hashValues = {
     "6a09e667",
